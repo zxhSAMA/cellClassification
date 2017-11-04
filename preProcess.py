@@ -27,10 +27,3 @@ def unpickle(file,opt='rb'):
     with open(file,opt) as fr:
         data=cPickle.load(fr)
     return data
-
-if __name__=='__main__':
-    import xlrd
-    data=xlrd.open_workbook('pulser.xlsx')
-    table=data.sheets()[0]
-    nrows=table.nrows
-    ncols=table.ncols

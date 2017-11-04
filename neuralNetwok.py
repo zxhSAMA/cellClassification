@@ -1,4 +1,5 @@
 __author__ = 'zhangxianghui'
+
 import numpy as np
 
 def sigmoid(x):
