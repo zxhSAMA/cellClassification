@@ -15,8 +15,8 @@ if __name__=='__main__':
             mcherry[i*60+j] = table.row_values(index[i]+j)[82:162]
     x_train=np.zeros((240,160))
     for i in range(240):
-        gfp[i]=pp.L2_norm(pp.mean_filt(gfp[i], [1, 1, 1, 1, 1]))
-        mcherry[i]=pp.L2_norm(pp.mean_filt(mcherry[i], [1, 1, 1, 1, 1]))
+        gfp[i]=pp.mean_filt(gfp[i], [1, 1, 1, 1, 1])/5
+        mcherry[i]=pp.mean_filt(mcherry[i], [1, 1, 1, 1, 1])/5
         x_train[i]=np.append(gfp[i],mcherry[i])
     y_train=np.concatenate((np.ones(60),2*np.ones(60),3*np.ones(60),4*np.ones(60)))
     train_set={'name':'train_set','number':240,'x':x_train,'y':y_train}
