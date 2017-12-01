@@ -35,6 +35,15 @@ for i in range(16):
     _gfp[i]=L2_norm(mean_filt(_gfp[i]))
     _mcherry[i]=L2_norm(mean_filt(_mcherry[i]))
 
+# train_gfp=np.array(_gfp[0:15])
+# train_mcherry=np.array(_mcherry[0:15])
+# test_gfp=np.array(_gfp[15])
+# test_mcherry=np.array(_mcherry[15])
+train_gfp=np.array(_gfp[1:16])
+train_mcherry=np.array(_mcherry[1:16])
+test_gfp=np.array(_gfp[0])
+test_mcherry=np.array(_mcherry[0])
+
 _x=tf.placeholder(tf.float32,[None,80])
 _y=tf.placeholder(tf.float32,[None,80])
 
@@ -60,29 +69,28 @@ sess=tf.Session()
 sess.run(init)
 
 for i in range(1000):
-    _,loss_value=sess.run([optimizer,loss],feed_dict={_x:_gfp,_y:_mcherry})
+    _,loss_value=sess.run([optimizer,loss],feed_dict={_x:train_gfp,_y:train_mcherry})
     if(i%50==0):
         print(loss_value)
 
-plat_gfp=np.zeros([1,80])+0.1
-train_gfp=_gfp
-plat_mcherry=sess.run(output3,feed_dict={_x:plat_gfp})
-train_mcherry=sess.run(output3,feed_dict={_x:train_gfp})
+result_mcherry=sess.run(output3,feed_dict={_x:test_gfp.reshape((1,80))})
 
 t=[i for i in range(80)]
 plt.figure('gfp train set')
-for i in range(16):
+for i in range(15):
     plt.subplot(4,4,i+1)
-    plt.plot(t,_gfp[i])
+    plt.plot(t,train_gfp[i])
 plt.figure('mcherry train set')
-for i in range(16):
-    plt.subplot(4,4,i+1)
-    plt.plot(t,_mcherry[i])
-plt.figure('use plat gfp dataset train mcherry')
-plt.plot(t,plat_mcherry[0])
-plt.figure('use train gfp dataset train mcherry')
-for i in range(16):
+for i in range(15):
     plt.subplot(4,4,i+1)
     plt.plot(t,train_mcherry[i])
+
+plt.figure('gfp test set')
+plt.plot(t,test_gfp)
+plt.figure('mcherry test set')
+plt.plot(t,test_mcherry)
+
+plt.figure('mcherry test result')
+plt.plot(t,result_mcherry[0])
 plt.show()
 plt.close()
