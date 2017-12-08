@@ -17,8 +17,8 @@ if __name__=='__main__':
             index=index+1
     x_test=np.zeros((103,160))
     for i in range(103):
-        gfp[i]=pp.L2_norm(pp.mean_filt(gfp[i], [1, 1, 1, 1, 1]))
-        mcherry[i]=pp.L2_norm(pp.mean_filt(mcherry[i], [1, 1, 1, 1, 1]))
+        gfp[i]=pp.mean_filt(gfp[i], [1, 1, 1, 1, 1])/5
+        mcherry[i]=pp.mean_filt(mcherry[i], [1, 1, 1, 1, 1])/5
         x_test[i]=np.append(gfp[i],mcherry[i])
     y_test=np.concatenate((np.ones(13),2*np.ones(23),3*np.ones(44),4*np.ones(23)))
     test_set={'name':'test_set','number':103,'x':x_test,'y':y_test}
