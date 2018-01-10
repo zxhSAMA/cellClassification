@@ -69,3 +69,15 @@ $$Re\lambda\leq0$$
 
 $$Im\lambda\neq0$$
 
+
+
+数据归一化$b_1=b_2=1$
+
+$$\frac{{\partial}f(x_k,y_k)}{{\partial}x}=\frac{K_1+{\gamma}y}{(K_1+x+{\gamma}y)^2}-d_1$$
+
+$$\frac{{\partial}f(x_k,y_k)}{{\partial}y}=-\frac{{\gamma}x}{(K_1+x+{\gamma}y)^2}$$
+
+$$\frac{{\partial}g(x_k,y_k)}{{\partial}x}=\frac{1}{K_2+x}-\frac{x}{(K_2+x)^2}$$
+
+$$\frac{{\partial}g(x_k,y_k)}{{\partial}y}=-d_2$$
+
